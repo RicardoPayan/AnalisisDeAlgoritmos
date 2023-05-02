@@ -2,7 +2,7 @@
 #include <chrono>
 #include <fstream>
 
-const int N_MAX = 100000;
+const int N_MAX = 1000000;
 
 using namespace std;
 using namespace std::chrono;
@@ -32,7 +32,7 @@ float EvaluaPolinomio(TPolinomio C, float X, int N) {
 }
 
 int main() {
-    std::ofstream output("resultados.txt");
+    std::ofstream output("resultados2.txt");
     output << "N\tTiempo (ms)\n";
 
     TPolinomio C;
@@ -40,7 +40,7 @@ int main() {
         C[i] = i;
     }
 
-    for (int N = 10000; N <= N_MAX; N += 10000) {
+    for (int N = 100000; N <= N_MAX; N += 100000) {
         auto start = high_resolution_clock::now();
 
         float resultado = EvaluaPolinomio(C, 2.5, N);

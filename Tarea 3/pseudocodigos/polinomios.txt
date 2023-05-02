@@ -40,3 +40,28 @@ FUNCTION EvaluaPolinomio(C: TPolinomio; X: REAL) : REAL;
         EvaluaPolinomio:=S;
     END {EvaluaPolinomio};
 
+#3er algoritmo
+
+FUNCTION EvaluaPolinomio(C: TPolinomio; X:REAL): REAL;
+    VAR i: INTEGER;
+        XN,S: REAL;
+    BEGIN
+        XN:= 1.0;
+        S:= C[0];
+        FOR i:= 0 TO N DO BEGIN
+            XN:= XN*X;  
+            S:= S + C[i]*XN;
+        END;
+        EvaluaPolinomio:= S;
+    END {EvaluaPolinomio};
+
+#4to algoritmo
+FUNCTION EvaluaPolinomio(C: TPolinomio; X: REAL): REAL;
+    VAR i: INTEGER;
+        S: REAL;
+    BEGIN
+        S:= 0.0;
+        FOR i:= N DOWNTO 0 DO
+            S:= S*X + C[i];
+        EvaluaPolinomio:= S;
+    END {EvaluaPolinomio}

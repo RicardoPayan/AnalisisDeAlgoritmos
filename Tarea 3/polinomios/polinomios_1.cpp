@@ -2,9 +2,9 @@
 #include <chrono>
 #include <fstream>
 
-const int MIN_N = 10000;
-const int MAX_N = 100000;
-const int STEP = 10000;
+const int MIN_N = 100000;
+const int MAX_N = 1000000;
+const int STEP = 100000;
 
 typedef float TPolinomio[MAX_N+1];
 
