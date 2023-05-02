@@ -1,40 +1,59 @@
-#include "librerias.h"
-
-//Complejidad computacional: O(n log n)
 #include <iostream>
+#include <chrono>
+#include <fstream>
 
-const int N = 3;
+const int N_MAX = 100000;
 
-// Prototipo de la función Potencia
-double Potencia(double X, int j);
+using namespace std;
+using namespace std::chrono;
 
-// Tipo de dato TPolinomio
-typedef double TPolinomio[N+1];
+typedef float TPolinomio[N_MAX + 1];
 
-// Función EvaluaPolinomio
-double EvaluaPolinomio(TPolinomio C, double X) {
-    double S = C[0];
-    for (int i = 1; i <= N; i++) {
+float Potencia(float X, int j) {
+    float t;
+    if (j == 0) {
+        return 1.0;
+    }
+    else if (j % 2 == 1) {
+        return X * Potencia(X, j - 1);
+    }
+    else {
+        t = Potencia(X, j / 2);
+        return t * t;
+    }
+}
+
+float EvaluaPolinomio(TPolinomio C, float X, int N) {
+    float S = C[0];
+    for (int i = 0; i <= N; ++i) {
         S += C[i] * Potencia(X, i);
     }
     return S;
 }
 
-// Función Potencia
-double Potencia(double X, int j) {
-    if (j == 0) {
-        return 1.0;
-    } else if (j % 2 == 1) {
-        return X * Potencia(X, j-1);
-    } else {
-        double t = Potencia(X, j/2);
-        return t * t;
-    }
-}
-
 int main() {
-    TPolinomio polinomio = {1.0, 2.0, 3.0, 4.0};
-    double resultado = EvaluaPolinomio(polinomio, 2.5);
-    std::cout << "El resultado de evaluar el polinomio_2 en x = 2.5 es: " << resultado << std::endl;
+    std::ofstream output("resultados.txt");
+    output << "N\tTiempo (ms)\n";
+
+    TPolinomio C;
+    for (int i = 0; i <= N_MAX; ++i) {
+        C[i] = i;
+    }
+
+    for (int N = 10000; N <= N_MAX; N += 10000) {
+        auto start = high_resolution_clock::now();
+
+        float resultado = EvaluaPolinomio(C, 2.5, N);
+
+        auto stop = high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+        float tiempo_ms = duration.count() / 1000.0f;
+        output << N << "\t" << tiempo_ms << "\n";
+
+        std::cout << "Para N = " << N << ", el resultado es " << resultado << " y tardó " << tiempo_ms << " ms.\n";
+    }
+
+    output.close();
+
     return 0;
 }
