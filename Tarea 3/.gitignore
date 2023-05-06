@@ -2,3 +2,4 @@ Tarea 3\pseudocodigos
 *.out
 .idea
 *.ipynb
+*.ipynb_checkpoints
