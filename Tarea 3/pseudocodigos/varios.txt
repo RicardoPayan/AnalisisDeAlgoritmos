@@ -1,0 +1,43 @@
+#Sum (a,n)
+
+a = 0
+Sum(a,n){
+    s:= 0
+    for i:= 1 to n do
+        s:= s + a[i]
+    return s;
+}
+
+#Rsum (a,n)
+RSum(a,n){
+    if (n<=0) then return 0.0;
+    else return RSum(a,n-1) + a[n];
+}
+
+#Add (a,b,c,m,n){
+    for i:= 1 to m do
+        for j:= 1 to n do
+            c[i,j]:= a[i,j] + b[i,j];
+}
+
+#Fibonacci
+Fibonacci(n){
+    if(n<=1) then
+        write(n);
+    else{
+        fnm2:=0; fnm1:=1;
+        for i:= 2 to n do{
+            fn:=fnm1 + fnm2;
+            fnm2:= fnm1; fnm1:=fn;
+        }
+        write(fn);
+    }
+}
+
+#Transpose
+Transpose(a,n){
+    for i:= 1 to n-1 do
+        for j:= i+1 to n do{
+            t:= a[i,j]; a[i,j]:=a[j,i]; a[j,i]:=t;
+        }
+}
